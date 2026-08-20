@@ -1,38 +1,61 @@
-# Jarvis 3D Web SPA
+# ULTRON Orb UI
 
-<!-- Video placeholder: this will embed `Jarvis-3D-Web-SPA-Video-Demo.mp4` from repository root -->
-https://github.com/user-attachments/assets/290f99a6-8ad7-4276-8c65-476b6a6b6f22
+An Iron Man–inspired holographic orb built with **Next.js**, **Three.js**, and **MediaPipe** hand tracking — control it with your bare hands through your webcam.
 
-# Project
+> 🔮 This is the open-source **interface** of [ULTRON](https://sagartamang.com/projects/ultron) — my AI that talks in real time and controls Android devices by itself. **[Read the write-up](https://sagartamang.com/projects/ultron)** or **[the X post](https://x.com/sagar_builds/status/2077277583646101921)**
 
-Jarvis 3D Web SPA is a lightweight single-page application that demonstrates a 3D viewer and interactive UI for Jarvis-style scenes and assets. This repository contains the minimal static web app (entry: `index.html`) and supporting assets.
+> 📱 **[Watch the demo on Instagram](https://www.instagram.com/p/DayJ17OTwvx/)**
 
+![ULTRON orb UI](docs/screenshot.png)
 
-## Run it online
-**Live demo (placeholder):** https://RmaNMetaverse.github.io/Jarvis-3D-GestureControl/
+https://github.com/user-attachments/assets/91578a83-9a27-44e8-84b0-96defcfd7366
 
+## Getting started
 
-## Features
+```bash
+npm install
+npm run dev
+```
 
-- Lightweight static SPA (HTML/CSS/JS)
-- Support for custom 3D models: `.gltf`, `.glb`
+Open [http://localhost:3000](http://localhost:3000).
 
-## Running Locally
+## Controls
 
-Requirements
-- A modern browser.
-- `git` to clone the repo.
+### Mouse / touch
 
-Quick start (open locally)
+| Input | Action |
+| --- | --- |
+| Drag | Spin the orb |
+| Scroll / pinch | Zoom in & out |
 
-1. Clone the repository:
+### Hand gestures (webcam)
 
-   `git clone https://github.com/RmaNMetaverse/Jarvis-3D-GestureControl.git`
+Click **GESTURES OFF** (or press `G`) and allow camera access, then:
 
-2. Open `index.html` in your browser, or run a simple static server (recommended):
+| Gesture | Action |
+| --- | --- |
+| Pinch (thumb + index) one hand and move it | Spin the orb |
+| Pinch with **both** hands, spread apart / bring together | Zoom in / out |
 
-   - Using Python 3 (works cross-platform):
+### Keyboard
 
-     `python -m http.server 8000`
+| Key | Action |
+| --- | --- |
+| `G` | Toggle hand gestures |
+| `R` | Reset the view |
+| `+` / `−` | Zoom in / out |
 
-   - Then visit: `http://localhost:8000`.
+## How it works
+
+- **`lib/orbScene.ts`** — the Three.js scene: layered wireframe shells, a spiral
+  inner core, floating code-text sprites, orbiting debris, dust particles, scan
+  rings, and a bloom + chromatic-aberration post-processing stack.
+- **`lib/handTracker.ts`** — MediaPipe HandLandmarker running on the webcam
+  feed. Pinch detection with hysteresis: one pinched hand spins the orb, two
+  pinched hands zoom by spreading apart or together.
+- **`components/JarvisOrb.tsx`** — the HUD and glue between the scene, the
+  tracker, and your inputs.
+
+## License
+
+MIT
